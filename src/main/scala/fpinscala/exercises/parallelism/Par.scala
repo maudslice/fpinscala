@@ -8,7 +8,7 @@ object Par:
   extension [A](pa: Par[A]) def run(s: ExecutorService): Future[A] = pa(s)
 
   def unit[A](a: A): Par[A] =
-    es => UnitFuture(a) // `unit` is represented as a function that returns a `UnitFuture`, which is a simple implementation of `Future` that just wraps a constant value. It doesn't use the `ExecutorService` at all. It's always done and can't be cancelled. Its `get` method simply returns the value that we gave it.
+    _ => UnitFuture(a) // `unit` is represented as a function that returns a `UnitFuture`, which is a simple implementation of `Future` that just wraps a constant value. It doesn't use the `ExecutorService` at all. It's always done and can't be cancelled. Its `get` method simply returns the value that we gave it.
 
   private case class UnitFuture[A](get: A) extends Future[A]:
     def isDone = true

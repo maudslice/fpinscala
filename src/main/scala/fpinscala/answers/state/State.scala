@@ -159,6 +159,9 @@ object State:
         b <- sb
       yield f(a, b)
 
+    def map2_1[B, C](sb: State[S, B])(f: (A, B) => C): State[S, C] =
+      flatMap(a => sb.map(b => f(a, b)))
+
     def flatMap[B](f: A => State[S, B]): State[S, B] = 
       s =>
         val (a, s1) = underlying(s)
