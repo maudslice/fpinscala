@@ -58,6 +58,6 @@ object Either:
       bb <- b
     } yield f(aa, bb)
 
-  def traverseAll[E, A, B](es: List[A], f: A => Either[List[E], B]): Either[List[E], List[B]] = ???
+  def traverseAll[E, A, B](as: List[A], f: A => Either[List[E], B]): Either[List[E], List[B]] = ???
 
-  def sequenceAll[E, A](es: List[Either[List[E], A]]): Either[List[E], List[A]] = ???
+  def sequenceAll[E, A](as: List[Either[List[E], A]]): Either[List[E], List[A]] = ???
