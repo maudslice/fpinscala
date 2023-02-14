@@ -51,7 +51,7 @@ object Par:
   def lazyUnit[A](a: => A): Par[A] = fork(unit(a))
 
   def asyncF[A,B](f: A => B): A => Par[B] =
-    a => lazyUnit(f(a))
+    a => lazyUnit(f(a)) 
 
   extension [A](pa: Par[A]) def map[B](f: A => B): Par[B] =
     pa.map2(unit(()))((a, _) => f(a))
@@ -108,6 +108,7 @@ object Par:
 
   def choiceN[A](n: Par[Int])(choices: List[Par[A]]): Par[A] =
     es =>
+      // 确保n不会越界
       val ind = n.run(es).get % choices.size // Full source files
       choices(ind).run(es)
 

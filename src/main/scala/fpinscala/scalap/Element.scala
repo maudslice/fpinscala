@@ -15,7 +15,7 @@ abstract class Element:
     if w <= width then this
     else
       val left = elem(' ', (w - width) / 2, height)
-      val right = elem(' ', w - width - left.width, height)
+      val right = elem(' ', w - width - left.width, height) 
       left beside this beside right
 
   def heighten(h: Int): Element =
