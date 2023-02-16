@@ -128,6 +128,23 @@ object Par:
       choices(k).run(es)
     }
 
+  def choiceViaChooser[A](a: Par[Boolean])(ifTrue: Par[A], ifFalse: Par[A]): Par[A] =
+    es => {
+      a.chooser(f => if f then ifTrue else ifFalse).run(es)
+    }
+
+  def choiceNViaChooser[A](n: Par[Int])(choices: List[Par[A]]): Par[A] =
+    es => {
+      n.chooser(choices(_)).run(es)
+    }
+
+  def choiceMapViaChooser[K, V](key: Par[K])(choices: Map[K, Par[V]]): Par[V] =
+    es => {
+      key.chooser(choices(_)).run(es)
+    }
+
+
+
   /* `chooser` is usually called `flatMap` or `bind`. */
   extension [A](pa: Par[A]) def flatMap[B](choices: A => Par[B]): Par[B] =
     es => {

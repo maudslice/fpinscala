@@ -32,7 +32,7 @@ object Nonblocking:
      * Helper function for constructing `Par` values out of calls to non-blocking continuation-passing-style APIs.
      * This will come in handy in Chapter 13.
      */
-    def async[A](f: (A => Unit) => Unit): Par[A] = 
+    def async[A](f: (A => Unit) => Unit): Par[A] =
       es => cb => f(cb)
 
     /**
